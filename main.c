@@ -19,3 +19,9 @@ int main()
     rechner_list();
     return 0;
 }
+
+
+
+//gcc code to compile all necessary files
+//gcc main.c list.c rechner_list.c
+//.\a.exe
