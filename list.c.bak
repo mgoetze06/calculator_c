@@ -82,12 +82,34 @@ void printL(List* e){
     }
     else{
         List* l = e;
-		printf("list length: %d\n",lengthList(e));
-        printf("list content: ");
+		printf("\n ### list length: %d\n",lengthList(e));
+        printf(" ### list content: ");
 		while(l != NULL){
             printf("%d ", l->item);
             l = l->next;
         }
     }
     printf("\n");
+}
+
+Anchor* invertList(Anchor* a) {
+	//List* f = malloc(sizeof(List));
+	List* prev = NULL;
+    List* current = a->first;
+    List* next = NULL;
+    while (current != NULL) {
+        // Store next
+        next = current->next;
+ 
+        // Reverse current node's pointer
+        current->next = prev;
+ 
+        // Move pointers one position ahead.
+        prev = current;
+        current = next;
+    }
+    a->first = prev;
+	
+	
+	return a;
 }

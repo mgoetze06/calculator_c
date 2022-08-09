@@ -24,7 +24,7 @@ List* popList(List* s) {
 		//printf("next item not NULL!\n");
 		f->next = (s->next)->next;
 		f->item = (s->next)->item;
-		printf("%d\n", f->item);
+		//printf("%d\n", f->item);
 	}
     return f;
 }
@@ -90,4 +90,26 @@ void printL(List* e){
         }
     }
     printf("\n");
+}
+
+Anchor* invertList(Anchor* a) {
+	//List* f = malloc(sizeof(List));
+	List* prev = NULL;
+    List* current = a->first;
+    List* next = NULL;
+    while (current != NULL) {
+        // Store next
+        next = current->next;
+ 
+        // Reverse current node's pointer
+        current->next = prev;
+ 
+        // Move pointers one position ahead.
+        prev = current;
+        current = next;
+    }
+    a->first = prev;
+	
+	
+	return a;
 }

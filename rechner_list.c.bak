@@ -4,7 +4,7 @@
 #include <stdlib.h>
 
 bool isOperator(char c){
-    if((c == '+')||(c == '*')||(c == '-')||(c == '/')){ 
+    if((c == '+')||(c == '*')||(c == '-')||(c == '/')||(c == '@')){ 
         //42 *
         //43 +
         return true;
@@ -24,7 +24,7 @@ int berechne(int a, int b, char op){
     return ergebnis;
 }
 
-int convertToInt(char c[3]){
+int convertToInt(char c[2]){
 	int mystrlen;
 	int x;
 	mystrlen = strlen(c);
@@ -49,34 +49,12 @@ void rechner_list(){
     printf("\n\n---   Taschenrechner   ---\n");
     Anchor* myanchor;
     List* list;
-    //printf("temp1\n");
     list = NULL;
     myanchor->first = list;
-    //printf("length: %d\n",lengthList(myanchor->first));
-    //printf("push 1\n");
-    //anchor = pushL(1,anchor);
-    //printf("print list with new 1\n");
-    //printf("length: %d\n",lengthList(anchor->first));
-    //printL(anchor->first);   
-    //printf("push 2\n");
-    //anchor = pushL(2,anchor);
-    //printf("print list with new 2\n");
-    //printL(anchor->first);   
-
     int x;
-    char c[3];
-    //printf("Enter a value :");
-    //scanf("%s", c);
-    //x = c[0] - '0';
-    //myanchor = pushL(x,myanchor);
-    //printf("length: %d\n",lengthList(anchor->first));
-    //printL(myanchor->first);  
-	//Anchor* new_anchor2;
-    //new_anchor2->first = popList(myanchor->first);
-	//myanchor->first = new_anchor2->first;
-	//printL(myanchor->first);  
-	
-    while (lengthList(myanchor->first) < 5){
+    char c[2];
+	while (1){
+    //while (lengthList(myanchor->first) < 5){
         printf("Enter a value :");
         scanf("%s", c);
         
@@ -90,35 +68,37 @@ void rechner_list(){
         
         int len = lengthList(myanchor->first);
 		
-        printf("Length: %d\n", len);
+        //printf("Length: %d\n", len);
         if (isOperator(c[0])){
 			if (len>1){
-				printf("%s is an operator\n", c);
-				//#############a
-				int a = myanchor->first->item;
-				//Anchor* new_anchor1;
-				//new_anchor1->first = popList(myanchor->first);
-				//myanchor->first = new_anchor1->first;
-				//printf("removed first operator-number\n", c);
-				//printL(myanchor->first);
-				//#############b
-				int b = myanchor->first->next->item;
-				//Anchor* new_anchor2;
-				//new_anchor2->first = popList(myanchor->first);
-				//myanchor->first = new_anchor2->first;
-				//printf("removed second operator-number\n", c);
-				//printL(myanchor->first);
-				//#############ergebnis
-				ergebnis = berechne(a,b,c[0]);
-				printf("ergebnis: %d\n", ergebnis);
-				myanchor->first=popList(myanchor->first);
-				myanchor->first=popList(myanchor->first);
-				Anchor* new_anchor3;
-				new_anchor3 = pushL(ergebnis,myanchor);
-				myanchor->first = new_anchor3->first;
-				//push(ergebnis,f);
+				//printf("%s is an operator\n", c);
 				
-				//printf("%d",temp);
+				if (c[0] == '@'){
+					//printf("need to invert list\n");
+					Anchor* new_anchor4;
+					new_anchor4 = invertList(myanchor);
+					myanchor->first = new_anchor4->first;
+					
+					//printf("invertion done\n");
+					
+					
+				}else{
+					//printf("normal calculation\n");
+					//a
+					int a = myanchor->first->item;
+					//b
+					int b = myanchor->first->next->item;
+					//solution
+					ergebnis = berechne(a,b,c[0]);
+					printf("ergebnis: %d\n", ergebnis);
+					//remove a and b from list
+					myanchor->first=popList(myanchor->first);
+					myanchor->first=popList(myanchor->first);
+					//add solution to list
+					Anchor* new_anchor3;
+					new_anchor3 = pushL(ergebnis,myanchor);
+					myanchor->first = new_anchor3->first;
+				}
             }else{
 				printf("an operator is not allowed with only one item in list!\n");
 			}
