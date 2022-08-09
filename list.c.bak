@@ -82,8 +82,8 @@ void printL(List* e){
     }
     else{
         List* l = e;
-		printf("\n ### list length: %d\n",lengthList(e));
-        printf(" ### list content: ");
+		printf("list length: %d\n",lengthList(e));
+        printf("list content: ");
 		while(l != NULL){
             printf("%d ", l->item);
             l = l->next;

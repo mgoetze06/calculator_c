@@ -90,7 +90,7 @@ void rechner_list(){
         
         int len = lengthList(myanchor->first);
 		
-        //printf("Length: %d\n", len);
+        printf("Length: %d\n", len);
         if (isOperator(c[0])){
 			if (len>1){
 				printf("%s is an operator\n", c);
