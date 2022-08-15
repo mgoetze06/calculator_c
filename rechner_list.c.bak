@@ -53,8 +53,7 @@ void rechner_list(){
     myanchor->first = list;
     int x;
     char c[2];
-	while (1){
-    //while (lengthList(myanchor->first) < 5){
+    while (lengthList(myanchor->first) < 50){
         printf("Enter a value :");
         scanf("%s", c);
         

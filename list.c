@@ -10,6 +10,23 @@
 
 //unterstes Listenelement hat keinen weiteren Zeiger (next = NULL)
 
+List* stock(int x, List* s) {
+	
+	while (current != NULL) {
+        // Store next
+        next = current->next;
+ 
+        // Reverse current node's pointer
+        current->next = prev;
+ 
+        // Move pointers one position ahead.
+        prev = current;
+        current = next;
+    }
+}
+
+
+
 List* popList(List* s) {
     //printf("inside pop list\n");
     //List* f;

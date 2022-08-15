@@ -4,7 +4,7 @@
 #include <stdlib.h>
 
 bool isOperator(char c){
-    if((c == '+')||(c == '*')||(c == '-')||(c == '/')||(c == '@')){ 
+    if((c == '+')||(c == '*')||(c == '-')||(c == '/')||(c == '@')||(c == '#')){ 
         //42 *
         //43 +
         return true;
@@ -73,31 +73,39 @@ void rechner_list(){
 				//printf("%s is an operator\n", c);
 				
 				if (c[0] == '@'){
+					
+					//printf("need to put first item at the end list\n");
+					Anchor* new_anchor5;
+					new_anchor5->first = stock(myanchor->first->item,myanchor->first);
+					myanchor->first = new_anchor5->first;
+					//printf("moving of first item done\n");
+					
+					
+				}else{
+					if (c[0] == '#'){
 					//printf("need to invert list\n");
 					Anchor* new_anchor4;
 					new_anchor4 = invertList(myanchor);
 					myanchor->first = new_anchor4->first;
 					
 					//printf("invertion done\n");
-					
-					
-				}else{
-					//printf("normal calculation\n");
-					//a
-					int a = myanchor->first->item;
-					//b
-					int b = myanchor->first->next->item;
-					//solution
-					ergebnis = berechne(a,b,c[0]);
-					printf("ergebnis: %d\n", ergebnis);
-					//remove a and b from list
-					myanchor->first=popList(myanchor->first);
-					myanchor->first=popList(myanchor->first);
-					//add solution to list
-					Anchor* new_anchor3;
-					new_anchor3 = pushL(ergebnis,myanchor);
-					myanchor->first = new_anchor3->first;
-				}
+					}else{
+						//printf("normal calculation\n");
+						//a
+						int a = myanchor->first->item;
+						//b
+						int b = myanchor->first->next->item;
+						//solution
+						ergebnis = berechne(a,b,c[0]);
+						printf("ergebnis: %d\n", ergebnis);
+						//remove a and b from list
+						myanchor->first=popList(myanchor->first);
+						myanchor->first=popList(myanchor->first);
+						//add solution to list
+						Anchor* new_anchor3;
+						new_anchor3 = pushL(ergebnis,myanchor);
+						myanchor->first = new_anchor3->first;
+					}
             }else{
 				printf("an operator is not allowed with only one item in list!\n");
 			}
