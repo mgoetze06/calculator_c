@@ -54,41 +54,29 @@ void rechner_list(){
     int x;
     char c[2];
     while (lengthList(myanchor->first) < 50){
-        printf("Enter a value :");
+		printf("##############################################################\n");
+		printf("possible values: integers 0 - 99, operators +-*/@#\n");
+        printf("Enter a value:");
         scanf("%s", c);
         
-        int ergebnis;
-        bool temp;
-		//Anchor* new_anchor;
-        //new_anchor = pushL(x,anchor);
+        int ergebnis;								//variable für ergebnis der rechenoperation
+        int len = lengthList(myanchor->first);		//länge der verketteten Liste
 		
-		//printL(anchor->first);
-        temp = isOperator(c[0]);
-        
-        int len = lengthList(myanchor->first);
-		
-        //printf("Length: %d\n", len);
         if (isOperator(c[0])){
-			if (len>1){
-				//printf("%s is an operator\n", c);
+			if (len>1){								//nur bei einer Listenlänge größer als 1 kann ein Operator angwandt werden
 				
 				if (c[0] == '@'){
-					
-					//printf("need to put first item at the end list\n");
-					Anchor* new_anchor5;
-					new_anchor5->first = stock(myanchor->first->item,myanchor->first);
-					myanchor->first = new_anchor5->first;
-					//printf("moving of first item done\n");
-					
+					//operator ist @ --> Funktion stock aufrufen (oberstes Element nach ganz unten verschieben)
+					myanchor->first = stock(myanchor->first->item,myanchor->first);
 					
 				}else{
 					if (c[0] == '#'){
-					//printf("need to invert list\n");
-					Anchor* new_anchor4;
-					new_anchor4 = invertList(myanchor);
-					myanchor->first = new_anchor4->first;
-					
-					//printf("invertion done\n");
+					//operator ist # --> Funktion stock aufrufen (oberstes Element nach ganz unten verschieben)
+						Anchor* new_anchor4;
+						new_anchor4 = invertList(myanchor);
+						myanchor->first = new_anchor4->first;
+						
+						//printf("invertion done\n");
 					}else{
 						//printf("normal calculation\n");
 						//a
@@ -106,6 +94,7 @@ void rechner_list(){
 						new_anchor3 = pushL(ergebnis,myanchor);
 						myanchor->first = new_anchor3->first;
 					}
+				}
             }else{
 				printf("an operator is not allowed with only one item in list!\n");
 			}

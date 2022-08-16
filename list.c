@@ -9,24 +9,32 @@
 //unterstes Listenelement hat keinen weiteren Zeiger (next = NULL)
 
 List* stock(int x, List* e) {	
-	//aus der Liste 4,3,2,1 wird 3,2,1,4
-	
-	//Liste der Länge 1 mit Element x erzeugen
-	List* f;
-    f->item = x;
-    f->next = NULL;
-	
-	
+	//aus der Liste x,3,2,1 wird 3,2,1,x
+
 	//aktuelle Liste bis zum letzten Element durchlaufen
 	List* l = e;
 	while(l != NULL){
-		l = l->next;
-	}
+		if (l->next == NULL){		//nächstes Listenelement ist NULL, deshalb Schleife verlassen, l ist letztes Listenelement der Liste e
+			
+			//printf("found the end\n", l->item);
+			break;
+		}else{
+			l = l->next; 			//aktuelles Listenelement ist nicht das letzte Element der Liste
+		}
+	}	
+	//neues Listenelement f aus dem Wert x erstellen
+	List* f = malloc(sizeof(List));
+	printf("new list created\n");
+	f->item = x;
+	f->next = NULL;
 	
-	//neues Listenelement f an das Ende anhängen
+	//neues Listenelement f an l anhängen
+	//l ist gleichzeitig das Ende von e
 	l->next = f;
 	
-	return l;
+	//oberstes Element von e entfernen
+	e = popList(e);
+	return e;
 }
 
 
@@ -34,10 +42,7 @@ List* stock(int x, List* e) {
 List* popList(List* s) {
 	//aus der Liste 4,3,2,1 wird 3,2,1
 	
-	
-    //printf("inside pop list\n");
     List* f = malloc(sizeof(List));
-	//printf("before if\n");
 	if (s->next == NULL){				//nächstes Element ist NULL --> Liste hat nur Länge 1
 		//printf("next item is NULL! end of list\n");
 		f = NULL;						//popList() erzeugt dadurch leere Liste
@@ -45,7 +50,6 @@ List* popList(List* s) {
 		//printf("next item not NULL!\n");
 		f->next = (s->next)->next;		//Liste wird an oberster Stelle abgeschnitten
 		f->item = (s->next)->item;
-		//printf("%d\n", f->item);
 	}
     return f;
 }
@@ -54,12 +58,9 @@ List* popList(List* s) {
 List* pushList(int x, List* s) {
 	//aus der Liste 4,3,2,1 wird x,4,3,2,1
 	
-	
     List* f = malloc(sizeof(List)); 	//neues Listenelement erstellen
-    //printf("pushing into list\n");
     f->item = x; 						//Liste->item zu x setzen
     f->next = s; 						//neues Listenelement oben an die bestehende Liste anfügen
-    //printf("finished pushing into list\n");
     return f; 							//neue Liste zurückgeben
 }
 
@@ -92,14 +93,14 @@ void printL(List* e){
     }
     else{
         List* l = e;
-		printf("\n ### list length: %d\n",lengthList(e));	//Länge der Liste ausgeben
-        printf(" ### list content: ");						//Inhalt der Liste ausgeben (oberstes Element zuerst (ganz links), unterstes Element zuletzt (ganz rechts)
+		printf("\n ### --- list length: %d --- ###\n",lengthList(e));	//Länge der Liste ausgeben
+        printf(" ### --- list content: ");						//Inhalt der Liste ausgeben (oberstes Element zuerst (ganz links), unterstes Element zuletzt (ganz rechts)
 		while(l != NULL){
             printf("%d ", l->item);
             l = l->next;
         }
     }
-    printf("\n");
+    printf(" --- ###\n");
 }
 
 Anchor* invertList(Anchor* a) {

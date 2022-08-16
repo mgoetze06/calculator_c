@@ -18,6 +18,7 @@ void printL(List* e);
 List* popList(List* s);
 int lengthList(List* e);
 Anchor* invertList(Anchor* a);
+List* stock(int x, List* e);
 //Anchor* popL(Anchor* a,List* s);
 
 

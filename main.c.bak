@@ -19,3 +19,9 @@ int main()
     rechner_list();
     return 0;
 }
+
+
+
+//gcc code zum kompilieren aller dateien
+//gcc main.c list.c rechner_list.c list.h
+//.\a.exe
