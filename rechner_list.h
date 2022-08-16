@@ -9,4 +9,5 @@ void rechner_list();
 bool isOperator(char* c);
 void list_test();
 int convertToInt(char c[2]);
+int berechne(int a, int b, char op);
 #endif

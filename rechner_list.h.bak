@@ -8,5 +8,5 @@
 void rechner_list();
 bool isOperator(char* c);
 void list_test();
-int convertToInt(char c[3]);
+int convertToInt(char c[2]);
 #endif
