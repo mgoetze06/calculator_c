@@ -34,13 +34,13 @@ int convertToInt(char c[2]){
 	int mystrlen;
 	int x;
 	mystrlen = strlen(c);
-	//printf("size of c: %d\n",mystrlen);
-	//x = c[0] - '0';
+	
 	if (mystrlen == 1){
-		//printf("single digit\n");
-		x = c[0] - '0';
+		//einzelne Ziffer
+		x = c[0] - '0'; //ASCI Code von 0 abziehen, um integer zu erhalten
 	}
 	else{
+		//Zahl aus 2 digits
 		x = (c[0]-'0')*10 + (c[1]-'0');
 	}
 	
