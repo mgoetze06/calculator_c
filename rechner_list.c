@@ -4,23 +4,29 @@
 #include <stdlib.h>
 
 bool isOperator(char c){
+	//Überprüfen, ob Eingabe des Nutzers ein Operator ist oder nicht
+	
     if((c == '+')||(c == '*')||(c == '-')||(c == '/')||(c == '@')||(c == '#')){ 
+		//Eingabe ist Operator
         //42 *
         //43 +
         return true;
     }else{
+		//Eingabe ist kein Operator
         return false;
     }
 }
 
 int berechne(int a, int b, char op){
     int ergebnis;
+	//Operator zwischen +-*/unterscheiden
     switch(op) {
     	case '+': ergebnis = a+b; break;
         case '-': ergebnis = b-a; break;
         case '*': ergebnis = a*b; break;
         case '/': ergebnis = a/b; break;
     }
+	//Ergebnis zurückliefern
     return ergebnis;
 }
 
@@ -47,6 +53,8 @@ int convertToInt(char c[2]){
 void rechner_list(){
     printf("rechner_list\n");
     printf("\n\n---   Taschenrechner   ---\n");
+	
+	//initialisierung
     Anchor* myanchor;
     List* list;
     list = NULL;
@@ -71,40 +79,54 @@ void rechner_list(){
 					
 				}else{
 					if (c[0] == '#'){
-					//operator ist # --> Funktion stock aufrufen (oberstes Element nach ganz unten verschieben)
+						//operator ist # --> Zusatzfunktion invertList aufrufen
+						//gesamte Liste invertieren
+						
+						//temporär neuen Anker erstellen
 						Anchor* new_anchor4;
 						new_anchor4 = invertList(myanchor);
+						
+						//ursprünglichen Anker mit temporärem Anker überschreiben
 						myanchor->first = new_anchor4->first;
 						
-						//printf("invertion done\n");
 					}else{
-						//printf("normal calculation\n");
-						//a
+						//normale Berechnung mit +-*/
+						//a == oberstes Element der Liste
 						int a = myanchor->first->item;
-						//b
+						//b == Nachfolger von a == zweitoberstes Element der Liste
 						int b = myanchor->first->next->item;
-						//solution
+						//Ergebnis mit Funktion berechne() berechnen; operator ist in c[0]
 						ergebnis = berechne(a,b,c[0]);
 						printf("ergebnis: %d\n", ergebnis);
-						//remove a and b from list
+						
+						//a and b von der Liste entfernen
 						myanchor->first=popList(myanchor->first);
 						myanchor->first=popList(myanchor->first);
-						//add solution to list
+						
+						//Ergebnis der Berechnung zur Liste hinzufügen
+						//temporär neuen Anker erstellen
 						Anchor* new_anchor3;
 						new_anchor3 = pushL(ergebnis,myanchor);
+						//ursprünglichen Anker mit temporärem Anker überschreiben
 						myanchor->first = new_anchor3->first;
 					}
 				}
             }else{
+				//Länge der Liste ist <= 1; kein Operator ist erlaubt
 				printf("an operator is not allowed with only one item in list!\n");
 			}
         }else{
-			x = convertToInt(c);
+			//Eingabe ist kein Operator, Eingabe wird als Zahl interpretiert
+			x = convertToInt(c); //aus Zeichenkette wird integer
+			
+			//neue Zahl zur Liste hinzufügen
+			//temporär neuen Anker erstellen
 			Anchor* new_anchor;
 			new_anchor = pushL(x,myanchor);
+			//ursprünglichen Anker mit temporärem Anker überschreiben
 			myanchor->first = new_anchor->first;
         }
-        printL(myanchor->first);
+        printL(myanchor->first); //Liste plotten
     }
 }
 
