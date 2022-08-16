@@ -37,7 +37,7 @@ int convertToInt(char c[2]){
 	
 	if (mystrlen == 1){
 		//einzelne Ziffer
-		x = c[0] - '0';
+		x = c[0] - '0'; //ASCI Code von 0 abziehen, um integer zu erhalten
 	}
 	else{
 		//Zahl aus 2 digits
@@ -138,51 +138,28 @@ void list_test(){
     printf("list_test\n");
     Anchor* anchor;
     List* list;
-    printf("temp1\n");
     list = NULL;
     anchor->first = list;
-    printf("length: %d\n",lengthList(anchor->first));
-    printf("push 1\n");
+    printf("pushing 1 into list\n");
     anchor = pushL(1,anchor);
-    //printf("print list with new 1\n");
-    printf("length: %d\n",lengthList(anchor->first));
     printL(anchor->first);   
-    //printf("push 2\n");
+    printf("pushing 2 into list\n");
     anchor = pushL(2,anchor);
-    //printf("print list with new 2\n");
     printL(anchor->first);   
-    anchor = pushL(3,anchor);
-    printf("length: %d\n",lengthList(anchor->first));
-    //printf("print list with new 3\n");
+	printf("pushing 5 into list\n");
+    anchor = pushL(5,anchor);
     printL(anchor->first);  
-    //printf("pop list:\n");
+    printf("pop list:\n");
     anchor->first = popList(anchor->first);
-    printf("length: %d\n",lengthList(anchor->first));
     printL(anchor->first);   
-    
-    /*list = pushList(3,list);
-    printL(list);   
-    //anchor = popL(anchor,list);
-    printf("temp3\n");
-    list = popList(list);
-    printL(list);   
-    printf("temp3\n");
-    list = pushList(2,list);
-    printL(list);
-    printf("temp4\n");
-    list = pushList(4,list);
-    printL(list); 
-    printf("temp51\n");
-    list = pushList(6,list);
-    printL(list);
-    printf("temp5\n");
-    list = popList(list);
-    printL(list);   
-    printf("temp61\n");
-    list = popList(list);
-    printL(list);   
-    printf("temp62\n");
-    list = pushList(21,list);
-    printL(list);   
-    printf("temp63\n");*/
+	printf("pop list:\n");
+    anchor->first = popList(anchor->first);
+    printL(anchor->first);   
+	printf("pop list:\n");
+    anchor->first = popList(anchor->first);
+    printL(anchor->first);  
+
+	printf("pushing 3 into list\n");
+    anchor = pushL(3,anchor);
+    printL(anchor->first);  
 }

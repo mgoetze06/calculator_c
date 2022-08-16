@@ -5,9 +5,17 @@
 int main()
 {
     printf("Starting Main program...\n");
-    //stacktest();
+    
+	//Stapelimplementierung aus dem Praktikum
+	//stacktest();
     //rechner();
+	
+	
+	
+	//Belegaufgabe a
     //list_test();
+	
+	//Belegaufgabe b
     rechner_list();
     return 0;
 }
@@ -15,5 +23,5 @@ int main()
 
 
 //gcc code zum kompilieren aller dateien
-//gcc main.c list.c rechner_list.c list.h
+//gcc main.c list.c rechner_list.c list.h rechner_list.h
 //.\a.exe
